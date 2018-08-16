@@ -16,7 +16,7 @@ Book.create(title: "Once and Future King", author: "That Other Guy", category_id
 Book.create(title: "Four Tendancies", author: "Gretchen Rubin", category_id: 2)
 Book.create(title: "Weaving the Web", author: "Tim Lee", category_id: 4)
 
-UserBook.create (note: "Might be a good one", library_link: "www.monroe.lib", user_id: 1, book_id: 1)
-UserBook.create (note: "Looks Interesting", library_link: "www.monroe.lib", user_id: 2, book_id: 2)
-UserBook.create (note: "recommended by Mike", library_link: "www.monroe.lib", user_id: 2, book_id: 3)
-UserBook.create (note: "Should read for work", library_link: "www.monroe.lib", user_id: 4, book_id: 4)
+UserBook.create(note: "Might be a good one", library_link: "www.monroe.lib", user_id: 1, book_id: 1)
+UserBook.create(note: "Looks Interesting", library_link: "www.monroe.lib", user_id: 2, book_id: 2)
+UserBook.create(note: "recommended by Mike", library_link: "www.monroe.lib", user_id: 2, book_id: 3)
+UserBook.create(note: "Should read for work", library_link: "www.monroe.lib", user_id: 4, book_id: 4)

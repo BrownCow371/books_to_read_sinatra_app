@@ -13,13 +13,14 @@
 
   /* --- Welcome Page Styles --- */
   body {
-    background-color: lightblue;
+    background-color: #D37AFF;
     color: #333;
     font-family: Sans-Serif;
     line-height: 18px;
   }
 
   .wrapper {
+    border: solid;
     background: #fff;
     -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
@@ -112,4 +113,15 @@
     font-size: 18px;
     line-height: 24px;
   }
+}
+
+  /* --- Signup Page Styles --- */
+div.signup {
+  border: solid;
+  width: 33%;
+  padding: 2em;
+}
+
+.warning {
+  color: red;
 }

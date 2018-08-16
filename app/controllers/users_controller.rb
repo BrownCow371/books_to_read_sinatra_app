@@ -9,13 +9,16 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    @user = User.new(params[:user])
-    if @user.valid?
+    @user =User.new(params[:user])
+    if @user.valid? && !User.find_by(email: params[:user][:email])
       @user.save
       session[:user_id] = @user.id
       redirect "users/#{@user.id}"
+    elsif User.find_by(email: params[:user][:email])
+      flash[:message]="You already have an account with the email provided. Please use the Login form below."
+      redirect '/login'
     else
-      flash[:message] = "Please provide a Name, Email and Password in order to Sign up. Thanks!"
+      flash[:message] = "In order to sign up, please provide you name, email and a password. Thanks!"
       redirect '/signup'
     end
   end

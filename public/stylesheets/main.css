@@ -115,8 +115,8 @@
   }
 }
 
-  /* --- Signup Page Styles --- */
-div.signup {
+  /* --- Signup/Login Page Styles --- */
+.signup, .login {
   border: solid;
   width: 33%;
   padding: 2em;

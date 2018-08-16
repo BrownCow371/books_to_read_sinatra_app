@@ -2,21 +2,18 @@
   <h2 class="warning"><%=flash[:message]%></h2>
 <%end%>
 
-<h1>New Book App User - Sign Up Page</h1>
+<h1>Book List - Existing User Login</h1>
 
 <div class="">
-  <form class="" action="/signup" method="post">
-    <div class="signup">
-      <label for="user[name]">Name: </label>
-      <input id="name" type="text" name="name">
-      <br></br>
+  <form class="" action="/login" method="post">
+    <div class="login">
       <label for="user[email]">Email: </label>
       <input id="email" type="text" name="email">
       <br></br>
       <label for="user[password]">Password: </label>
       <input id="password" type="text" name="password">
       <br></br>
-      <input type="submit" name="signup" value="Sign Up">
+      <input type="submit" name="login" value="Login">
     </div>
   </form>
 </div>

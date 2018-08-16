@@ -8,4 +8,14 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :email, presence: true
   validates :password, presence: true
+
+  def slug
+    self.name.split(/\W/).join("-").downcase
+  end
+
+  def self.find_by_slug(slug)
+    self.all.find do |user|
+      user.slug == slug
+    end
+  end
 end

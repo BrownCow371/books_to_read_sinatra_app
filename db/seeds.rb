@@ -1,0 +1,22 @@
+User.create(name: "Monica", email: "monica@friends.com", password: "password")
+User.create(name: "Joey", email: "joey@friends.com", password: "password")
+User.create(name: "Chandler", email: "chandler@friends.com", password: "password")
+User.create(name: "Ross", email: "ross@friends.com", password: "password")
+
+Category.create(name: "Fiction")
+Category.create(name: "Non-Fiction")
+Category.create(name: "Fantasy")
+Category.create(name: "Romance")
+Category.create(name: "Science Fiction")
+Category.create(name: "Mystery")
+
+Book.create(title: "End of the World Running Club", author: "Some Guy", category_id: 1)
+Book.create(title: "Harry Potter" , author: "J.K. Rowling", category_id: 3)
+Book.create(title: "Once and Future King", author: "That Other Guy", category_id: 3)
+Book.create(title: "Four Tendancies", author: "Gretchen Rubin", category_id: 2)
+Book.create(title: "Weaving the Web", author: "Tim Lee", category_id: 4)
+
+UserBook.create (note: "Might be a good one", library_link: "www.monroe.lib", user_id: 1, book_id: 1)
+UserBook.create (note: "Looks Interesting", library_link: "www.monroe.lib", user_id: 2, book_id: 2)
+UserBook.create (note: "recommended by Mike", library_link: "www.monroe.lib", user_id: 2, book_id: 3)
+UserBook.create (note: "Should read for work", library_link: "www.monroe.lib", user_id: 4, book_id: 4)

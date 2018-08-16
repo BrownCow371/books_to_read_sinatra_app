@@ -125,3 +125,24 @@
 .warning {
   color: red;
 }
+
+/* Table Format*/
+#table {
+  margin: 0 0 20px;
+  border: solid;
+}
+
+#table th, td {
+  padding: 10px;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+#table tr:nth-child(odd) {
+  background: #efefef;
+}
+
+#table th {
+  background: #555;
+  color: white;
+}

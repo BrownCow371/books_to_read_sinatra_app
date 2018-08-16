@@ -1,6 +1,6 @@
 <h1>Welcome, <%=@user.name%>, to your book list page!</h1>
 
-<table>
+<table id="table">
   <tr>
     <th>Title</th>
     <th>Author</th>
@@ -11,8 +11,8 @@
     <tr>
       <td><%= book.title %></td>
       <td><%= book.author %></td>
-      <td><%= book.category %></td>
-      <td><%= book.note %></td>
+      <td><%= book.category.name %></td>
+      <td><%=book.user_books.find{|ub| ub.user_id == @user.id}.note%></td>
     </tr>
-    <%end%>
+  <%end%>
 <table>

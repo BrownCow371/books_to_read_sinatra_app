@@ -34,7 +34,8 @@ class UsersController < ApplicationController
   post '/login' do
     @user = User.find_by(email: params[:user][:email])
     if @user && @user.authenticate(params[:user][:password])
-      session[:user_id]  =@user.id
+      session[:user_id] = @user.id
+      redirect "/users/#{@user.id}"
     else
       flash[:message] = "Unable to log you in with those credentials. Please try again."
       redirect '/login'
@@ -44,16 +45,18 @@ class UsersController < ApplicationController
 
 
   get '/users/:id' do
-    if logged_in? && current_user.id == params[:id]
-      @user = User.find_by(id: params[:id])
-      erb :'users/show'
-    elsif logged_in? && !current_user.id == params[:id]
-      flash[:message] = "You cannot view another User's book list."
-      redirect '/books'
-    else
-      flash[:message] = "Need to be logged in to view your book list page. Please Login."
-      redirect '/login'
-    end
+    @user = User.find_by(id: params[:id])
+    erb :'users/show'
+    # if logged_in? && current_user.id == params[:id]
+    #   @user = User.find_by(id: params[:id])
+    #   erb :'users/show'
+    # elsif logged_in? && !current_user.id == params[:id]
+    #   flash[:message] = "You cannot view another User's book list."
+    #   redirect '/books'
+    # else
+    #   flash[:message] = "Need to be logged in to view your book list page. Please Login."
+    #   redirect '/login'
+    # end
   end
 
 end

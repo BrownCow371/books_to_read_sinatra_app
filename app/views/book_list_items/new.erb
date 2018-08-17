@@ -4,22 +4,18 @@
 provide a way to create a new book
 and I need to  know what user I'm working with  -->
 
-<form action="index.html" method="post">
-  Either - pick an existing book or create a new book
-  <p>Pick from the existing list of books not already on your list:</p>
+<form action="/book_list_items" method="post">
+  <input type="hidden" name="user_id" value="<%=current_user.id%>">
+  <h2>Pick from the existing list of books not already on your list:</h2>
     <ul>
       <%@books.each do |book|%>
         <li><input type="checkbox" id="book_<%=book.id%>" name="book_list_item[book_ids][]" value="<%=book.id%>"><%=book.title%> by <%=book.author%></input></li>
-        <li> <label for=""></label> <input id="" type="text" name="book_list_item[]" value=""> </li>
+          <ul>
+            <li> <label for="book_id_<%=book.id%>_note">Note: </label> <input id="book_id_<%=book.id%>_note" type="text" name="book_list_item[book_id_<%=book.id%>][note]"> </li>
+            <li> <label for="book_id_<%=book.id%>_library_link">Library Link</label> <input id="book_id_<%=book.id%>_library_link" type="text" name="book_list_item[book_id_<%=book.id%>][library_link]"> </li>
+          </ul>
       <%end%>
   </ul>
-</form>
 
-<!-- <p><strong>Figure Name:</strong> <input type="text" id="figure_name" name="figure[name]" value=""></p>
-<h3>Titles (pick from existing):</h3>
-  <%@titles.each do |title| %>
-    <input type="checkbox" id="title_<%=title.id%>" name="figure[title_ids][]" value="<%=title.id%>"><%=title.name%></input>
-  <%end%>
-<br></br>
-<strong>....Or Create a New Title:</strong>
-<p>Title Name: <input type="text" name="title[name]" id="new_title"></p> -->
+  <input type="submit" name="Add Book(s)" value="Add Book(s)">
+</form>

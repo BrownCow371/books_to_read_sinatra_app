@@ -1,21 +1,35 @@
-<h1>New Book List Item Page</h1>
+<% if flash[:message] %>
+  <h2 class="warning"><%=flash[:message]%></h2>
+<%end%>
 
+<h1>New Book List Item Page</h1>
 <!--thisngs I need to do here are provide a list of existing books
 provide a way to create a new book
 and I need to  know what user I'm working with  -->
 
 <form action="/book_list_items" method="post">
-  <input type="hidden" name="user_id" value="<%=current_user.id%>">
-  <h2>Pick from the existing list of books not already on your list:</h2>
-    <ul>
-      <%@books.each do |book|%>
-        <li><input type="checkbox" id="book_<%=book.id%>" name="book_list_item[book_ids][]" value="<%=book.id%>"><%=book.title%> by <%=book.author%></input></li>
-          <ul>
-            <li> <label for="book_id_<%=book.id%>_note">Note: </label> <input id="book_id_<%=book.id%>_note" type="text" name="book_list_item[book_id_<%=book.id%>][note]"> </li>
-            <li> <label for="book_id_<%=book.id%>_library_link">Library Link</label> <input id="book_id_<%=book.id%>_library_link" type="text" name="book_list_item[book_id_<%=book.id%>][library_link]"> </li>
-          </ul>
-      <%end%>
-  </ul>
+  <input type="hidden" name="book_list_item[user_id]" value="<%=current_user.id%>">
+  <h3>Pick from the existing books that are not already on your list:</h3>
+    <%@books.each do |book|%>
+      <p><input type="checkbox" name="check_list_items[book_ids][]" value="<%=book.id%>"><%=book.title%> by <%=book.author%></input></p>
+        <ul>
+          <li> <label for="book_id_<%=book.id%>_note">Note: </label> <input id="book_id_<%=book.id%>_note" type="text" name="check_list_items[book_id_<%=book.id%>][note]"> </li>
+          <li> <label for="book_id_<%=book.id%>_library_link">Library Link</label> <input id="book_id_<%=book.id%>_library_link" type="text" name="check_list_items[book_id_<%=book.id%>][library_link]"> </li>
+        </ul>
+    <%end%>
 
-  <input type="submit" name="Add Book(s)" value="Add Book(s)">
+  <h3>And/or create a new book:</h3>
+  <p><label for="title">Book Title:</label> <input id="title" type="text" name="book[title]"></p>
+  <p><label for="author">Author:</label> <input id="author" type="text" name="book[author]"></p>
+  <p><label for="category">Category:</label>
+    <select id="category" name="book[category_id]">
+        <!-- <option value="nil"></option> -->
+      <%@categories.each do |category|%>
+        <option value="<%=category.id%>"><%=category.name%></option>
+      <%end%>
+    </select>
+  <p><label for="note">Note:</label> <input id="note" type="text" name="book_list_item[note]"></p>
+  <p><label for="library_link">Library Link:</label> <input id="library_link" type="text" name="book_list_item[library_link]"></p>
+
+  <input class="big_button" type="submit" name="Add Book(s)" value="Add Book(s)">
 </form>

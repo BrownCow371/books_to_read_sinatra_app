@@ -126,7 +126,7 @@
   color: red;
 }
 
-/* Table Format*/
+  /* --- Table Styles --- */
 #table {
   margin: 0 0 20px;
   border: solid;
@@ -147,6 +147,7 @@
   color: white;
 }
 
+  /* --- Button Styles --- */
 .big_button {
     margin: 0 10px 20px;
     padding: 10px;

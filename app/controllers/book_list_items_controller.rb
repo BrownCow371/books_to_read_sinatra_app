@@ -55,7 +55,9 @@ class BookListItemsController < ApplicationController
      end
   end
 
-  patch
+  patch '/book_list_items/:id' do
+
+  end
 
   delete '/book_list_items/:id/delete' do
    list_item = BookListItem.find_by_id(params[:id])

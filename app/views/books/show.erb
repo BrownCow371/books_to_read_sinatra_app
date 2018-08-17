@@ -1,0 +1,18 @@
+<h1>"<%=@book.title%>" - Show Page</h1>
+
+<table id="table">
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Category</th>
+    <th>Edit</th>
+    <th>Remove</th>
+  </tr>
+  <tr>
+    <td><%= @book.title %></td>
+    <td><%= @book.author %></td>
+    <td><%= @book.category.name %></td>
+    <td><%= @book.book_list_items.first.user.id %> </td>
+    <td></td>
+    </tr>
+  <table>

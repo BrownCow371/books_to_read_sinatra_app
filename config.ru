@@ -8,5 +8,5 @@ use Rack::MethodOverride
 use BookListItemsController
 use UsersController
 use BooksController
-use CategoriesControllera
+use CategoriesController
 run ApplicationController

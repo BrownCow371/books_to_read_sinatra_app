@@ -15,20 +15,21 @@
   </tr>
   <%@user.books.each do |book| %>
     <tr>
+      <%book_list_item = @user.book_list_items.find_by(book_id: book.id)%>
       <td><%= book.title %></td>
       <td><%= book.author %></td>
       <td><%= book.category.name %></td>
-      <td><a href="<%=book.book_list_items.first.library_link%>" target="_blank">Library link</a></td>
-      <td><%=book.book_list_items.first.note%></td>
-      <td><form action="/books/<%=book.id%>/delete" method="post">
+      <td><a href="<%=book_list_item.library_link%>" target="_blank">Library link</a></td>
+      <td><%=book_list_item.note%></td>
+      <td><form action="/book_list_items/<%=book_list_item.id%>/delete" method="post">
         <input type="hidden" name="_method" value="delete">
-        <input type="hidden" name="user_id" value="<%=@user.id%>">
-        <input type="submit" name="<%=book.id%>" value="Remove Book">
+        <input type="submit" name="remove book" value="Remove Book">
       </form></td>
     </tr>
   <%end%>
 <table>
 
+    <!-- current_user.book_list_items.find_by(book_id: params[:id]).destroy -->
   <form  action="/books/add_book" method="get">
     <input class="big_button" type="submit" value="Add Book to List">
   </form>

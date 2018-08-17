@@ -12,20 +12,5 @@ class BooksController < ApplicationController
    end
  end
 
- get '/books/add_book' do
-    if logged_in?
-     @books=Book.all
-     erb :'books/add_book'
-    else
-     erb :'users/login'
-    end
- end
 
- delete '/books/:id/delete' do
-  #  binding.pry
-  #  @user = current_user
-  #  @book = Book.find_by_id(params[:id])
-   current_user.book_list_items.find_by(book_id: params[:id]).destroy
-   redirect "/users/#{current_user.id}"
- end
 end

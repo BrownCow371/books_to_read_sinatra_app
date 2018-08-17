@@ -5,6 +5,7 @@
     <th>Title</th>
     <th>Author</th>
     <th>Category</th>
+    <th>Location</th>
     <th>Your Notes</th>
   </tr>
   <%@user.books.each do |book| %>
@@ -12,7 +13,8 @@
       <td><%= book.title %></td>
       <td><%= book.author %></td>
       <td><%= book.category.name %></td>
-      <td><%=book.user_books.find{|ub| ub.user_id == @user.id}.note%></td>
+      <td><a href="<%=book.book_list_items.first.library_link%>">Library link</a></td>
+      <td><%=book.book_list_items.first.note%></td>
     </tr>
   <%end%>
 <table>

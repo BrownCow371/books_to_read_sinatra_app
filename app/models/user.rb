@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  has_many :user_books
-  has_many :books, through: :user_books
+  has_many :book_list_items
+  has_many :books, through: :book_list_items
   has_many :categories, through: :books
 
   has_secure_password

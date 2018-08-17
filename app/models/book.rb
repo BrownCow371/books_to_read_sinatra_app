@@ -1,6 +1,6 @@
 class Book < ActiveRecord::Base
-  has_many :user_books
-  has_many :users, through: :user_books
+  has_many :book_list_items
+  has_many :users, through: :book_list_items
   belongs_to :category
 
   validates :title, presence: true

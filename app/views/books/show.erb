@@ -5,14 +5,21 @@
     <th>Title</th>
     <th>Author</th>
     <th>Category</th>
-    <th>Edit</th>
-    <th>Remove</th>
   </tr>
   <tr>
     <td><%= @book.title %></td>
     <td><%= @book.author %></td>
     <td><%= @book.category.name %></td>
-    <td><%= @book.book_list_items.first.user.id %> </td>
-    <td></td>
     </tr>
   <table>
+
+    <% editable =  (@book.book_list_items.count == 1 && @book.book_list_items.first.user_id == current_user.id) %>
+
+        <form action="/books/<%=@book.id%>/edit" method="get">
+          <input class="big_button" type="submit" value="Edit Book" <%='disabled' if !editable%>>
+        </form>
+
+        <form action="/books/<%=@book.id%>/delete" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input class="big_button" type="submit" value="Delete Book" <%='disabled' if !editable%>>
+        </form>

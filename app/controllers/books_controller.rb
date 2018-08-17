@@ -21,4 +21,17 @@ class BooksController < ApplicationController
    end
  end
 
+   get '/books/:id/edit' do
+    if logged_in?
+      @book=Book.find_by_id(params[:id])
+      erb :'books/edit'
+    else
+      erb :'users/login'
+    end
+   end
+
+  delete '/books/:id' do
+    # show usser erroe page for now - placeholder
+    erb :'users/error'
+  end
 end

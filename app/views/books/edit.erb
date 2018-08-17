@@ -1,1 +1,34 @@
-Allow edits if user created book and is only user attached to book through booklists
+<% if flash[:message] %>
+  <h2 class="warning"><%=flash[:message]%></h2>
+<%end%>
+
+<h1>"<%=@book.title%>" - Edit Page</h1>
+
+<% editable =  (@book.book_list_items.count == 1 && @book.book_list_items.first.user_id == current_user.id) %>
+
+<form action="/books/<%=@book.id%>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <table id="table">
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Category</th>
+    </tr>
+    <tr>
+      <td> <input size="65" type="text" name="book[title]" value="<%= @book.title %>"></td>
+      <td> <input type="text" name="book[author]" value="<%= @book.author %>"> </td>
+      <td>
+        <select id="category" name="book[category_id]">
+          <%@categories.each do |category|%>
+            <option value="<%=category.id%>"><%=category.name%></option>
+          <%end%>
+        </select>
+      </td>
+      </tr>
+    <table>
+  <input class="big_button" type="submit" value="Edit Book" <%='disabled' if !editable%>>
+</form>
+
+<form class="" action="/books" method="get">
+  <input class="big_button" type="submit" name="Return to Book Index" value="Return to Book Index">
+</form>

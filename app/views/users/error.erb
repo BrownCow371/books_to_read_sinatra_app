@@ -1,9 +1,10 @@
 <h1>Error Message Page</h1>
 <% if flash[:message] %>
   <h2 class="warning"><%=flash[:message]%></h2>
+  <%=flash[:message].clear%>
 <%end%>
 
-<%=flash[:message].clear%>
+
 <a href="/users/<%=current_user.id%>">Return to your Book List</a>
 <br></br>
 <a href="/books">Return to Book Index</a>

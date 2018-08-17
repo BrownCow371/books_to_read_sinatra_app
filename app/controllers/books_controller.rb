@@ -23,6 +23,7 @@ class BooksController < ApplicationController
 
    get '/books/:id/edit' do
     if logged_in?
+      @categories = Category.all
       @book=Book.find_by_id(params[:id])
       erb :'books/edit'
     else
@@ -30,7 +31,21 @@ class BooksController < ApplicationController
     end
    end
 
-  delete '/books/:id' do
+   patch '/books/:id' do
+     binding.pry
+    if logged_in?
+      @book=Book.find_by_id(params[:id])
+      if @book.update(params[:book])
+        redirect "/books/#{@book.id}"
+      else
+        flash[:message] = "When editing a book, please be sure to include both a tilte and an author."
+        redirect "/books/#{@book.id}/edit"
+    else
+      erb :'users/login'
+    end
+   end
+
+  delete '/books/:id/delete' do
     # show usser erroe page for now - placeholder
     erb :'users/error'
   end

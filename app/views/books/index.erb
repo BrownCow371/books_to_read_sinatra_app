@@ -6,6 +6,6 @@
 
 <ul>
   <%@books.each do |book| %>
-    <li><a href="#"><%=book.title%></a> by <%=book.author%></li>
+    <li><a href="/books/<%=book.id%>"><%=book.title%></a> by <%=book.author%></li>
   <%end%>
 </ul>

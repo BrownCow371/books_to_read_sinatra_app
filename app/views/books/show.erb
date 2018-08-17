@@ -1,3 +1,7 @@
+<% if flash[:message] %>
+  <h2 class="warning"><%=flash[:message]%></h2>
+<%end%>
+
 <h1>"<%=@book.title%>" - Show Page</h1>
 
 <table id="table">

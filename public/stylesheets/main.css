@@ -146,3 +146,13 @@
   background: #555;
   color: white;
 }
+
+.big_button {
+    margin: 0 10px 20px;
+    padding: 10px;
+    float: left;
+    width: auto;
+    height: 42px;
+    border:2px solid #ccc;
+    font-size: 1em;
+}

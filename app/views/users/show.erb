@@ -11,6 +11,7 @@
     <th>Category</th>
     <th>Location</th>
     <th>Your Notes</th>
+    <th>Remove from list?</th>
   </tr>
   <%@user.books.each do |book| %>
     <tr>
@@ -19,10 +20,19 @@
       <td><%= book.category.name %></td>
       <td><a href="<%=book.book_list_items.first.library_link%>" target="_blank">Library link</a></td>
       <td><%=book.book_list_items.first.note%></td>
+      <td><form action="/books/<%=book.id%>/delete" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="hidden" name="user_id" value="<%=@user.id%>">
+        <input type="submit" name="<%=book.id%>" value="Remove Book">
+      </form></td>
     </tr>
   <%end%>
 <table>
 
-  <form action="/logout" method="get">
-    <input type="submit" value="Logout">
+  <form  action="/books/add_book" method="get">
+    <input class="big_button" type="submit" value="Add Book to List">
+  </form>
+
+  <form  action="/logout" method="get">
+    <input class="big_button" type="submit" value="Logout">
   </form>

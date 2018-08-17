@@ -1,14 +1,17 @@
 class BookListItemsController < ApplicationController
 
-  get '/book-list_items/new' do
+  get '/book_list_items/new' do
      if logged_in?
-      @books=Book.all
-      erb :'book_list_item/new'
+      @books=Book.all.select{|book| !(current_user.books.include?(book))}
+      erb :'book_list_items/new'
      else
       erb :'users/login'
      end
   end
 
+  post '/book_list_items' do
+    
+  end
 
 
   delete '/book_list_items/:id/delete' do

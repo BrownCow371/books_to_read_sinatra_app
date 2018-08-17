@@ -11,8 +11,6 @@ class BookListItemsController < ApplicationController
   end
 
   post '/book_list_items' do
-    #  binding.pry
-
     if params[:book_list_item][:user_id].to_i == current_user.id
       if params[:check_list_items][:book_ids]
         params[:check_list_items][:book_ids].each do |id|
@@ -22,8 +20,7 @@ class BookListItemsController < ApplicationController
         bli.save
         end
       end
-      # need to check to see if new book section was filledin
-      # need to make sure new book is valid before save
+
       if !params[:book].empty? && Book.new(params[:book]).valid?
         book = Book.find_or_create_by(params[:book])
         new_list_item = BookListItem.new(params[:book_list_item])
@@ -33,13 +30,32 @@ class BookListItemsController < ApplicationController
         flash[:message] = "When creating a new book, please provide both a tilte and an author."
         redirect '/book_list_items/new'
       end
+
       redirect "/users/#{current_user.id}"
+
     else
       flash[:message]="You cannot add books to another user's list. We have redirected you to your own list."
       redirect "/users/#{current_user.id}"
     end
   end
 
+  get '/book_list_items/:id' do
+    # need to check current user id against book list item user id
+    @booklistitem = BookListItem.find_by_id(params[:id])
+    erb '/book_list_items/show'
+  end
+
+  get '/book_list_items/:id/edit' do
+     if logged_in?
+       @categories = Category.all
+       @books=Book.all.select{|book| !(current_user.books.include?(book))}
+      erb :'book_list_items/edit'
+     else
+      erb :'users/login'
+     end
+  end
+
+  patch
 
   delete '/book_list_items/:id/delete' do
    list_item = BookListItem.find_by_id(params[:id])

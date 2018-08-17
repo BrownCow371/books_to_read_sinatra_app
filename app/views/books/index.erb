@@ -1,0 +1,11 @@
+<% if flash[:message] %>
+  <h2 class="warning"><%=flash[:message]%></h2>
+<%end%>
+
+<h1>Book Index Page</h1>
+
+<ul>
+  <%@books.each do |book| %>
+    <li><a href="#"><%=book.title%></a> by <%=book.author%></li>
+  <%end%>
+</ul>

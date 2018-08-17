@@ -45,18 +45,21 @@ class UsersController < ApplicationController
 
 
   get '/users/:id' do
-    @user = User.find_by(id: params[:id])
-    erb :'users/show'
-    # if logged_in? && current_user.id == params[:id]
-    #   @user = User.find_by(id: params[:id])
-    #   erb :'users/show'
-    # elsif logged_in? && !current_user.id == params[:id]
-    #   flash[:message] = "You cannot view another User's book list."
-    #   redirect '/books'
-    # else
-    #   flash[:message] = "Need to be logged in to view your book list page. Please Login."
-    #   redirect '/login'
-    # end
+    if logged_in? && current_user.id == params[:id].to_i
+      @user = User.find_by(id: current_user.id)
+      erb :'users/show'
+    elsif logged_in? && !(current_user.id == params[:id].to_i)
+      flash[:message] = "You cannot view another User's book list. We've redirected to your own book list."
+      redirect "/users/#{current_user.id}"
+    else
+      flash[:message] = "Need to be logged in to view your book list page. Please Login."
+      redirect '/login'
+    end
+  end
+
+  get '/logout'do
+    session.clear
+    redirect '/login'
   end
 
 end

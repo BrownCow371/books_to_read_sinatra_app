@@ -16,8 +16,14 @@ class BookListItemsController < ApplicationController
    end
 
   post '/book_list_items' do
+    # binding.pry
     if params[:book_list_item][:user_id].to_i == current_user.id
-      if params[:check_list_items][:book_ids]
+      if params[:book_list_item] && params[:add_book_button]
+        new_by_button = BookListItem.create(params[:book_list_item])
+        redirect "/users/#{current_user.id}"
+      end
+
+      if params[:check_list_items]
         params[:check_list_items][:book_ids].each do |id|
         bli = BookListItem.new(book_id: id, user_id: current_user.id)
         bli.note = params[:check_list_items]["book_id_#{id}"][:note]
@@ -26,7 +32,7 @@ class BookListItemsController < ApplicationController
         end
       end
 
-      if !params[:book].empty? && Book.new(params[:book]).valid?
+      if params[:book] && Book.new(params[:book]).valid?
         book = Book.find_or_create_by(params[:book])
         new_list_item = BookListItem.new(params[:book_list_item])
         new_list_item.book_id=book.id
@@ -72,7 +78,7 @@ class BookListItemsController < ApplicationController
   delete '/book_list_items/:id/delete' do
    list_item = BookListItem.find_by_id(params[:id])
     if current_user.id == list_item.user_id
-      flash[:message] = "We have removed #{list_item.book.title} by #{list_item.book.author} from your book list."
+      flash[:message] = "We have removed ''#{list_item.book.title} by #{list_item.book.author}'' from your book list."
       list_item.destroy
       redirect "/users/#{current_user.id}"
     else

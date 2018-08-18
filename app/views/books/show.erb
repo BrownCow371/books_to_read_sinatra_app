@@ -18,20 +18,28 @@
   <table>
 
     <% editable =  (@book.book_list_items.count == 1 && @book.book_list_items.first.user_id == current_user.id) %>
+    <% addable =  !@book.book_list_items.find_by(user_id: current_user.id) %>
 
-        <form action="/books/<%=@book.id%>/edit" method="get">
-          <input class="big_button" type="submit" value="Edit Book" <%='disabled' if !editable%>>
-        </form>
+    <form action="/book_list_items" method="post">
+      <input type="hidden" name="book_list_item[book_id]" value="<%=@book.id%>">
+      <input type="hidden" name="book_list_item[user_id]" value="<%=current_user.id%>">
+      <input type="hidden" name="add_book_button" value="true">
+      <input class="big_button" type="submit" value="Add to Your List" <%='disabled' if !addable%>>
+    </form>
 
-        <form action="/books/<%=@book.id%>/delete" method="post">
-          <input type="hidden" name="_method" value="delete">
-          <input class="big_button" type="submit" value="Delete Book" <%='disabled' if !editable%>>
-        </form>
+    <form action="/books/<%=@book.id%>/edit" method="get">
+      <input class="big_button" type="submit" value="Edit Book" <%='disabled' if !editable%>>
+    </form>
 
-        <form action="/books" method="get">
-          <input class="big_button" type="submit" value="View Book Index">
-        </form>
+    <form action="/books/<%=@book.id%>/delete" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <input class="big_button" type="submit" value="Delete Book" <%='disabled' if !editable%>>
+    </form>
 
-        <form action="/users/<%=current_user.id%>" method="get">
-          <input class="big_button" type="submit" value="View Your Book List">
-        </form>
+    <form action="/books" method="get">
+      <input class="big_button" type="submit" value="View Book Index">
+    </form>
+
+    <form action="/users/<%=current_user.id%>" method="get">
+      <input class="big_button" type="submit" value="View Your Book List">
+    </form>

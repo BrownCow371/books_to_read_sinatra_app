@@ -3,9 +3,6 @@
 <%end%>
 
 <h1>New Book List Item Page</h1>
-<!--thisngs I need to do here are provide a list of existing books
-provide a way to create a new book
-and I need to  know what user I'm working with  -->
 
 <form action="/book_list_items" method="post">
   <input type="hidden" name="book_list_item[user_id]" value="<%=current_user.id%>">

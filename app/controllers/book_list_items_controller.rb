@@ -51,7 +51,7 @@ class BookListItemsController < ApplicationController
   end
 
   get '/book_list_items/:id' do
-    # need to check current user id against book list item user id
+    # We don't call this route via any buttons...is this needed?
     @booklistitem = BookListItem.find_by_id(params[:id])
     if @booklistitem.user_id == current_user.id
       erb '/book_list_items/show'

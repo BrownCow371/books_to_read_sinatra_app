@@ -26,9 +26,18 @@
       </td>
       </tr>
     <table>
-  <input class="big_button" type="submit" value="Edit Book" <%='disabled' if !editable%>>
+  <input class="big_button clearfix" type="submit" value="Edit Book" <%='disabled' if !editable%>>
 </form>
+
+<br></br><br>
+
+<h2>Or.......</h2>
+
 
 <form class="" action="/books" method="get">
   <input class="big_button" type="submit" name="Return to Book Index" value="Return to Book Index">
+</form>
+
+<form action="/users/<%=current_user.id%>" method="get">
+  <input class="big_button" type="submit" value="View Your Book List">
 </form>

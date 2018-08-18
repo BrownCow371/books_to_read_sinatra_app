@@ -9,3 +9,7 @@
     <li><a href="/books/<%=book.id%>"><%=book.title%></a> by <%=book.author%></li>
   <%end%>
 </ul>
+
+<form action="/users/<%=current_user.id%>" method="get">
+  <input class="big_button" type="submit" value="View Your Book List">
+</form>

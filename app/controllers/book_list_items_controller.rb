@@ -1,5 +1,10 @@
 class BookListItemsController < ApplicationController
 
+  # Users should only be able to add a book to their list once
+  # users should only be able to add one book list item per book (so only one set of notes/book location per book)
+
+  # no get '/book_list_items' index page - doesn't make any sense
+
   get '/book_list_items/new' do
      if logged_in?
        @categories = Category.all
@@ -8,7 +13,7 @@ class BookListItemsController < ApplicationController
      else
       erb :'users/login'
      end
-  end
+
 
   post '/book_list_items' do
     if params[:book_list_item][:user_id].to_i == current_user.id
@@ -27,7 +32,7 @@ class BookListItemsController < ApplicationController
         new_list_item.book_id=book.id
         new_list_item.save
       else
-        flash[:message] = "When creating a new book, please provide both a tilte and an author."
+        flash[:message] = "When creating a new book, please provide both a title and an author."
         redirect '/book_list_items/new'
       end
 
@@ -42,7 +47,12 @@ class BookListItemsController < ApplicationController
   get '/book_list_items/:id' do
     # need to check current user id against book list item user id
     @booklistitem = BookListItem.find_by_id(params[:id])
-    erb '/book_list_items/show'
+    if @booklistitem.user_id == current_user.id
+      erb '/book_list_items/show'
+    else
+      flash[:message] = "You cannot view List items from other user's lists. We've redirected you to your own book list page."
+      redirect "/users/#{current_user.id}"
+    end
   end
 
   get '/book_list_items/:id/edit' do

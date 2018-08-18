@@ -1,7 +1,5 @@
 class BooksController < ApplicationController
 
- # Users should only be able to add a book to their list once
- # users should only be able to add one book list itme per book (so only one set of notes/book location per book)
 
  get '/books' do
    if logged_in?
@@ -12,34 +10,37 @@ class BooksController < ApplicationController
    end
  end
 
- get '/books/:id' do
-   if logged_in?
-     @book=Book.find_by_id(params[:id])
-     erb :'books/show'
-   else
-     erb :'users/login'
-   end
- end
+# no get '/books/new or post '/books'
+# new books are handled through book_list_items_controller
 
-   get '/books/:id/edit' do
-    if logged_in?
-      @categories = Category.all
-      @book=Book.find_by_id(params[:id])
-      erb :'books/edit'
-    else
-      erb :'users/login'
+  get '/books/:id' do
+     if logged_in?
+       @book=Book.find_by_id(params[:id])
+       erb :'books/show'
+     else
+       erb :'users/login'
+     end
+  end
+
+    get '/books/:id/edit' do
+      if logged_in?
+        @categories = Category.all
+        @book=Book.find_by_id(params[:id])
+        erb :'books/edit'
+      else
+        erb :'users/login'
+      end
     end
-   end
 
    patch '/books/:id' do
-     binding.pry
     if logged_in?
       @book=Book.find_by_id(params[:id])
       if @book.update(params[:book])
         redirect "/books/#{@book.id}"
       else
-        flash[:message] = "When editing a book, please be sure to include both a tilte and an author."
+        flash[:message] = "When editing a book, please be sure to include both a title and an author."
         redirect "/books/#{@book.id}/edit"
+      end
     else
       erb :'users/login'
     end

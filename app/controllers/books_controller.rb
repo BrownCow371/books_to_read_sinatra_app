@@ -47,7 +47,16 @@ class BooksController < ApplicationController
    end
 
   delete '/books/:id/delete' do
-    # show usser erroe page for now - placeholder
-    erb :'users/error'
+    # show user error page for now - placeholder
+    # erb :'users/error'
+    @book = Book.find_by_id(params[:id])
+    if (@book.book_list_items.count == 1 && @book.book_list_items.first.user_id == current_user.id)
+      flash[:message] = "We have removed #{list_item.book.title} by #{list_item.book.author} from the book index."
+      @book.destroy
+      redirect "/books"
+    else
+      flash[:message] = "You are not allowed to remove this book - it has been added to another user's book list."
+      redirect "/books/#{@book.id}"
+    end
   end
 end

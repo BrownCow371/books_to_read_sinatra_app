@@ -19,9 +19,9 @@
         <%book_list_item = @user.book_list_items.find_by(book_id: book.id)%>
         <td><%= book.title %></td>
         <td><%= book.author %></td>
-        <td><%= book.category.name %></td>
+        <td><%if book.category %><%= book.category.name %><%end%></td>
         <td>
-          <%if !book_list_item.library_link.empty?%>
+          <%if book_list_item.library_link%>
             <a href="<%=book_list_item.library_link%>" target="_blank">Library link</a>
           <%end%></td>
         <td><%=book_list_item.note%></td>

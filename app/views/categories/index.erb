@@ -1,3 +1,11 @@
 <% if flash[:message] %>
   <h2 class="warning"><%=flash[:message]%></h2>
 <%end%>
+
+<h1>Category Index Page</h1>
+
+<ul>
+  <%@categories.each do |cat|%>
+    <li> <a href="/categories/<%=cat.id%>"><%=cat.name%></a></li>
+    <%end%>
+</ul>

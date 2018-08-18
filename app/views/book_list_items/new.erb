@@ -20,7 +20,7 @@
   <p><label for="author">Author:</label> <input id="author" type="text" name="book[author]"></p>
   <p><label for="category">Category:</label>
     <select id="category" name="book[category_id]">
-        <!-- <option value="nil"></option> -->
+        <option value=""></option>
       <%@categories.each do |category|%>
         <option value="<%=category.id%>"><%=category.name%></option>
       <%end%>

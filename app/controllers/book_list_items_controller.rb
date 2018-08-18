@@ -21,33 +21,33 @@ class BookListItemsController < ApplicationController
       if params[:book_list_item] && params[:add_book_button]
         new_by_button = BookListItem.create(params[:book_list_item])
         redirect "/users/#{current_user.id}"
-      end
-
-      if params[:check_list_items]
-        params[:check_list_items][:book_ids].each do |id|
-        bli = BookListItem.new(book_id: id, user_id: current_user.id)
-        bli.note = params[:check_list_items]["book_id_#{id}"][:note]
-        bli.library_link = params[:check_list_items]["book_id_#{id}"][:library_link]
-        bli.save
-        end
-      end
-
-      if params[:book] && Book.new(params[:book]).valid?
-        book = Book.find_or_create_by(params[:book])
-        new_list_item = BookListItem.new(params[:book_list_item])
-        new_list_item.book_id=book.id
-        new_list_item.save
       else
-        flash[:message] = "When creating a new book, please provide both a title and an author."
-        redirect '/book_list_items/new'
+        if params[:check_list_items][:book_ids]
+          params[:check_list_items][:book_ids].each do |id|
+          bli = BookListItem.new(book_id: id, user_id: current_user.id)
+          bli.note = params[:check_list_items]["book_id_#{id}"][:note]
+          bli.library_link = params[:check_list_items]["book_id_#{id}"][:library_link]
+          bli.save
+          end
+        end
+
+        if !params[:book][:title].empty? && Book.new(params[:book]).valid?
+          book = Book.find_or_create_by(params[:book])
+          new_list_item = BookListItem.new(params[:book_list_item])
+          new_list_item.book_id=book.id
+          new_list_item.save
+        elsif !params[:book][:title].empty? || !params[:book][:author].empty? || !params[:book][:category_id].empty?
+          flash[:message] = "When creating a new book, please provide both a title and an author."
+          redirect '/book_list_items/new'
+        end
+
+        redirect "/users/#{current_user.id}"
       end
-
-      redirect "/users/#{current_user.id}"
-
     else
       flash[:message]="You cannot add books to another user's list. We have redirected you to your own list."
       redirect "/users/#{current_user.id}"
     end
+
   end
 
   get '/book_list_items/:id' do

@@ -17,7 +17,7 @@
     <%@user.books.each do |book| %>
       <tr>
         <%book_list_item = @user.book_list_items.find_by(book_id: book.id)%>
-        <td><%= book.title %></td>
+        <td><a href="/books/<%=book.id%>"><%= book.title %></a> </td>
         <td><%= book.author %></td>
         <td><%if book.category %><%= book.category.name %><%end%></td>
         <td>

@@ -79,5 +79,16 @@ class CategoriesController < ApplicationController
     end
   end
 
+  delete '/categories/:id/delete' do
+    @category= Category.find_by_id(params[:id])
+    if @category.books.empty?
+      flash[:message] = "You have removed '#{@category.name}' from the list of available categories."
+      @category.destroy
+      redirect "/categories"
+    else
+      flash[:message] = "You are not allowed to remove this category - it is assoaciated with at least one book."
+      redirect "/categories/#{@category.id}"
+    end
+  end
 
 end

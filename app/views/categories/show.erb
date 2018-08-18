@@ -19,6 +19,11 @@
   <input class="big_button" type="submit" value="Add a Category">
 </form>
 
+<form action="/categories/<%=@category.id%>/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input class="big_button" type="submit" value="Delete Category">
+</form>
+
 <form action="/categories" method="get">
   <input class="big_button" type="submit" value="View Category Index">
 </form>

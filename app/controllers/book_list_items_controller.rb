@@ -63,8 +63,7 @@ class BookListItemsController < ApplicationController
 
   get '/book_list_items/:id/edit' do
      if logged_in?
-       @categories = Category.all
-       @books=Book.all.select{|book| !(current_user.books.include?(book))}
+      @book_list_item=BookListItem.find_by_id(params[:id])
       erb :'book_list_items/edit'
      else
       erb :'users/login'
@@ -72,13 +71,23 @@ class BookListItemsController < ApplicationController
   end
 
   patch '/book_list_items/:id' do
+    list_item = BookListItem.find_by_id(params[:id])
+    if current_user.id == list_item.user_id
     # Need to edit item notes and library_link
+      list_item.update(params[:book_list_item])
+      flash[:message] = "You have updated you book list item for '#{list_item.book.title} by #{list_item.book.author}'."
+      redirect "/users/#{current_user.id}"
+    else
+      flash[:message] = "You canno update the book information for the list item you specified."
+      redirect "/users/#{current_user.id}"
+    end
+
   end
 
   delete '/book_list_items/:id/delete' do
    list_item = BookListItem.find_by_id(params[:id])
     if current_user.id == list_item.user_id
-      flash[:message] = "We have removed ''#{list_item.book.title} by #{list_item.book.author}'' from your book list."
+      flash[:message] = "You have removed '#{list_item.book.title} by #{list_item.book.author}' from your book list."
       list_item.destroy
       redirect "/users/#{current_user.id}"
     else

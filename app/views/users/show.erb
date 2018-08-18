@@ -23,7 +23,7 @@
         <td><a href="<%=book_list_item.library_link%>" target="_blank">Library link</a></td>
         <td><%=book_list_item.note%></td>
         <td>
-          <form action="/book_list_items/<%=book_list_item.id%>/edit" method="post">
+          <form action="/book_list_items/<%=book_list_item.id%>/edit" method="get">
           <input type="submit" name="edit entry" value="Edit">
           </form>
         </td>

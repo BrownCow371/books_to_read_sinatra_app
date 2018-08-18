@@ -3,4 +3,24 @@
 <%end%>
 
 
-<h1>Edit "Book" list item for "User"</h1>
+<h1>Edit '<%=@book_list_item.book.title%>' entry for <%=current_user.name%>'s Book List</h1>
+<form action="/book_list_items/<%=@book_list_item.id%>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <table id="table">
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Category</th>
+      <th>Location</th>
+      <th>Your Notes</th>
+    </tr>
+    <tr>
+      <td><%= @book_list_item.book.title %></td>
+      <td><%= @book_list_item.book.author %></td>
+      <td><%= @book_list_item.book.category.name %></td>
+      <td> <input type="text" name="book_list_item[library_link]" value="<%=@book_list_item.library_link%>"></td>
+      <td><input type="text" name="book_list_item[note]" value="<%=@book_list_item.note%>"></td>
+    </tr>
+  <table>
+  <input type="submit" name="edit" value="Edit">
+</form>

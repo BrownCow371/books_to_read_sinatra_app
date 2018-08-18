@@ -1,7 +1,6 @@
 class BookListItemsController < ApplicationController
-
   # Users should only be able to add a book to their list once
-  # users should only be able to add one book list item per book (so only one set of notes/book location per book)
+  # (so there is only one book list itme per book per user)
 
   # no get '/book_list_items' index page - doesn't make any sense
 

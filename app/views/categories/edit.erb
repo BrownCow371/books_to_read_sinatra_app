@@ -1,3 +1,38 @@
 <% if flash[:message] %>
   <h2 class="warning"><%=flash[:message]%></h2>
 <%end%>
+
+<h1>Books in the '<%=@category.name%>' Category</h1>
+<ul>
+  <%@category.books.each do |book|%>
+    <li> <a href="/books/<%=book.id%>"><%=book.title%></a> by <%=book.author%></li>
+  <%end%>
+</ul>
+
+<h3>Change Category Name (will affect all above listed books):</h3>
+
+<form class="" action="/categories/<%=@category.id%>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <input type="text" name="category[name]" value="<%=@category.name%>">
+  <input type="submit" name="Edit Category" value="Edit Category">
+</form>
+
+<br></br><br>
+
+<h2>   Or.....</h2>
+
+<form action="/categories/new" method="get">
+  <input class="big_button" type="submit" value="Add a Category">
+</form>
+
+<form action="/categories" method="get">
+  <input class="big_button" type="submit" value="View Category Index">
+</form>
+
+<form action="/books" method="get">
+  <input class="big_button" type="submit" value="View Book Index">
+</form>
+
+<form action="/users/<%=current_user.id%>" method="get">
+  <input class="big_button" type="submit" value="View Your Book List">
+</form>

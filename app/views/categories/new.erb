@@ -1,3 +1,33 @@
 <% if flash[:message] %>
   <h2 class="warning"><%=flash[:message]%></h2>
 <%end%>
+<h1>New Category Page</h1>
+
+<form  action="/categories" method="post">
+  <h2></h2>
+  <strong><label for="category[name]">New Category Name:</label></strong>
+  <input id="category[name]" type="text" name="category[name]">
+
+  <h3>OPTIONAL: Add new category to any of the following books that are missing categories:</h3>
+    <% @book_wo_cat.each do |book|%>
+      <p><input type="checkbox" name="category[book_ids][]" value="<%=book.id%>"><%=book.title%> by <%=book.author%></input></p>
+    <%end%>
+    <br>
+    <input class="big_button" type="submit" name="Create Category" value="Create Category">
+
+</form>
+
+<br></br><br>
+<h2>   Or.....</h2>
+
+<form action="/categories" method="get">
+  <input class="big_button" type="submit" value="View Category Index">
+</form>
+
+<form action="/books" method="get">
+  <input class="big_button" type="submit" value="View Book Index">
+</form>
+
+<form action="/users/<%=current_user.id%>" method="get">
+  <input class="big_button" type="submit" value="View Your Book List">
+</form>

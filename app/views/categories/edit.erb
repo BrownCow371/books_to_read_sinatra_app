@@ -9,12 +9,20 @@
   <%end%>
 </ul>
 
-<h3>Change Category Name (will affect all above listed books):</h3>
+<h2>Edit Category (will affect all above listed books):</h2>
 
 <form class="" action="/categories/<%=@category.id%>" method="post">
   <input type="hidden" name="_method" value="patch">
-  <input type="text" name="category[name]" value="<%=@category.name%>">
-  <input type="submit" name="Edit Category" value="Edit Category">
+  <strong><label for="category[name]">Name:</label></strong>
+  <input id="category[name]" type="text" name="category[name]" value="<%=@category.name%>">
+  <br></br>
+
+  <h3>OPTIONAL: Add category to any of the following books that are missing categories:</h3>
+    <% @book_wo_cat.each do |book|%>
+      <p><input type="checkbox" name="category[book_ids][]" value="<%=book.id%>"><%=book.title%> by <%=book.author%></input></p>
+    <%end%>
+
+  <input class="big_button" type="submit" name="Edit Category" value="Edit Category">
 </form>
 
 <br></br><br>

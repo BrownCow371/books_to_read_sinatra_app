@@ -23,10 +23,10 @@ class BookListItemsController < ApplicationController
       else
         if params[:check_list_items][:book_ids]
           params[:check_list_items][:book_ids].each do |id|
-          bli = BookListItem.new(book_id: id, user_id: current_user.id)
-          bli.note = params[:check_list_items]["book_id_#{id}"][:note]
-          bli.library_link = params[:check_list_items]["book_id_#{id}"][:library_link]
-          bli.save
+            bli = BookListItem.new(book_id: id, user_id: current_user.id)
+            bli.note = params[:check_list_items]["book_id_#{id}"][:note]
+            bli.library_link = params[:check_list_items]["book_id_#{id}"][:library_link]
+            bli.save
           end
         end
 
@@ -77,7 +77,7 @@ class BookListItemsController < ApplicationController
       flash[:message] = "You have updated you book list item for '#{list_item.book.title} by #{list_item.book.author}'."
       redirect "/users/#{current_user.id}"
     else
-      flash[:message] = "You canno update the book information for the list item you specified."
+      flash[:message] = "You cannot update the book information for the list item you specified."
       redirect "/users/#{current_user.id}"
     end
 

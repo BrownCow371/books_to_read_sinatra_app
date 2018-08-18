@@ -20,17 +20,20 @@ class CategoriesController < ApplicationController
 
   post '/categories' do
 
-    @cat = Category.find_or_initialize_by(name: params[:category][:name])
+    @category = Category.find_or_initialize_by(name: params[:category][:name])
       # binding.pry
-    if @cat.valid? && params[:category][:book_ids]
-      @cat.save
-      params[:category][:book_ids].each do |book_id|
-        book=Book.find_by_id(book_id)
-        book.category= @cat
-        book.save
-      end
-      redirect "/categories/#{@cat.id}"
-    elsif !@cat.valid?
+    if @category.valid?
+      @category.save
+      if params[:category][:book_ids]
+        params[:category][:book_ids].each do |book_id|
+          book=Book.find_by_id(book_id)
+          book.category= @category
+          book.save
+          end
+        end
+      flash[:message] = "You have successfully added the '#{@category.name}' category."
+      redirect "/categories/#{@category.id}"
+    elsif !@category.valid?
       flash[:message] = "When creating a category, please be sure to provide a category name."
       redirect "/categories/new"
     else
@@ -70,6 +73,7 @@ class CategoriesController < ApplicationController
             book.save
           end
         end
+      flash[:message] = "You have successfully updated the '#{@category.name}' category."
       redirect "/categories/#{@category.id}"
     elsif params[:category][:name].empty?
       flash[:message] = "When editing a category, please be sure to provide a category name."
@@ -86,7 +90,7 @@ class CategoriesController < ApplicationController
       @category.destroy
       redirect "/categories"
     else
-      flash[:message] = "You are not allowed to remove this category - it is assoaciated with at least one book."
+      flash[:message] = "You are not allowed to remove this category - it is associated with at least one book."
       redirect "/categories/#{@category.id}"
     end
   end

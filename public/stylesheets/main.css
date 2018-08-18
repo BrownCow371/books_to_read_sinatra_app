@@ -158,6 +158,13 @@
     font-size: 1em;
 }
 
-.long_input {
-  width: 100px;
+  /* --- Fixes --- */
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  height: 0;
+  line-height: 0;
 }

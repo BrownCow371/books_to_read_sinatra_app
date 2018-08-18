@@ -31,5 +31,17 @@ and I need to  know what user I'm working with  -->
   <p><label for="note">Note:</label> <input id="note" type="text" name="book_list_item[note]"></p>
   <p><label for="library_link">Library Link:</label> <input id="library_link" type="text" name="book_list_item[library_link]"></p>
 
-  <input class="big_button" type="submit" name="Add Book(s)" value="Add Book(s)">
+  <input class="big_button clearfix" type="submit" name="Add Book" value="Add Book(s)"></input>
+</form>
+
+<br></br><br>
+
+<h2>   Or.....</h2>
+
+<form action="/books" method="get">
+  <input class="big_button" type="submit" value="View Book Index">
+</form>
+
+<form action="/users/<%=current_user.id%>" method="get">
+  <input class="big_button" type="submit" value="View Your Book List">
 </form>

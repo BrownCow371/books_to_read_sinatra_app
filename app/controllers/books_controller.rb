@@ -51,7 +51,7 @@ class BooksController < ApplicationController
     # erb :'users/error'
     @book = Book.find_by_id(params[:id])
     if (@book.book_list_items.count == 1 && @book.book_list_items.first.user_id == current_user.id)
-      flash[:message] = "We have removed #{list_item.book.title} by #{list_item.book.author} from the book index."
+      flash[:message] = "You have removed '#{@book.title} by #{@book.author}' from the book index."
       @book.destroy
       redirect "/books"
     else

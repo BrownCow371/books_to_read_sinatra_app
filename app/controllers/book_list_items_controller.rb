@@ -13,7 +13,7 @@ class BookListItemsController < ApplicationController
      else
       erb :'users/login'
      end
-
+   end
 
   post '/book_list_items' do
     if params[:book_list_item][:user_id].to_i == current_user.id
@@ -66,7 +66,7 @@ class BookListItemsController < ApplicationController
   end
 
   patch '/book_list_items/:id' do
-
+    # Need to edit item notes and library_link
   end
 
   delete '/book_list_items/:id/delete' do
@@ -80,4 +80,5 @@ class BookListItemsController < ApplicationController
       redirect "/users/#{current_user.id}"
     end
   end
+
 end

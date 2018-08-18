@@ -27,3 +27,11 @@
           <input type="hidden" name="_method" value="delete">
           <input class="big_button" type="submit" value="Delete Book" <%='disabled' if !editable%>>
         </form>
+
+        <form action="/books" method="get">
+          <input class="big_button" type="submit" value="View Book Index">
+        </form>
+
+        <form action="/users/<%=current_user.id%>" method="get">
+          <input class="big_button" type="submit" value="View Your Book List">
+        </form>

@@ -20,7 +20,10 @@
         <td><%= book.title %></td>
         <td><%= book.author %></td>
         <td><%= book.category.name %></td>
-        <td><a href="<%=book_list_item.library_link%>" target="_blank">Library link</a></td>
+        <td>
+          <%if !book_list_item.library_link.empty?%>
+            <a href="<%=book_list_item.library_link%>" target="_blank">Library link</a>
+          <%end%></td>
         <td><%=book_list_item.note%></td>
         <td>
           <form action="/book_list_items/<%=book_list_item.id%>/edit" method="get">

@@ -47,8 +47,6 @@ class BooksController < ApplicationController
    end
 
   delete '/books/:id/delete' do
-    # show user error page for now - placeholder
-    # erb :'users/error'
     @book = Book.find_by_id(params[:id])
     if (@book.book_list_items.count == 1 && @book.book_list_items.first.user_id == current_user.id)
       flash[:message] = "You have removed '#{@book.title} by #{@book.author}' from the book index."

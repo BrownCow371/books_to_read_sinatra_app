@@ -2,7 +2,8 @@
   <h2 class="warning"><%=flash[:message]%></h2>
 <%end%>
 
-<h1>Book List - Existing User Login</h1>
+<h1>Welcome to 'Books to Read' - a Sinatra App</h1>
+<h2>Existing User Login</h2>
 
 <div class="">
   <form class="" action="/login" method="post">
@@ -17,3 +18,8 @@
     </div>
   </form>
 </div>
+
+<h2>Not an existing user? No worries! Please Sign up: </h2>
+<form  action="/signup" method="get">
+  <input class="big_button" type="submit" value="Signup">
+</form>

@@ -19,9 +19,7 @@ class CategoriesController < ApplicationController
   end
 
   post '/categories' do
-
     @category = Category.find_or_initialize_by(name: params[:category][:name])
-      # binding.pry
     if @category.valid?
       @category.save
       if params[:category][:book_ids]
@@ -62,8 +60,7 @@ class CategoriesController < ApplicationController
   end
 
   patch '/categories/:id' do
-    # binding.pry
-      @category = Category.find_by_id(params[:id])
+    @category = Category.find_by_id(params[:id])
     if logged_in? && !params[:category][:name].empty?
       @category.update(name: params[:category][:name])
         if params[:category][:book_ids]

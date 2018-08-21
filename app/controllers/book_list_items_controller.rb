@@ -63,13 +63,12 @@ class BookListItemsController < ApplicationController
     if current_user.id == list_item.user_id
     # Need to edit item notes and library_link
       list_item.update(params[:book_list_item])
-      flash[:message] = "You have updated you book list item for '#{list_item.book.title} by #{list_item.book.author}'."
+      flash[:message] = "You have updated your book list item for '#{list_item.book.title} by #{list_item.book.author}'."
       redirect "/users/#{current_user.id}"
     else
       flash[:message] = "You cannot update the book information for the list item you specified."
       redirect "/users/#{current_user.id}"
     end
-
   end
 
   delete '/book_list_items/:id/delete' do

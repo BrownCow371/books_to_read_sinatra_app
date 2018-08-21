@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    @user =User.new(params[:user])
+    @user = User.new(params[:user])
     if @user.valid? && !User.find_by(email: params[:user][:email])
       @user.save
       session[:user_id] = @user.id
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
       flash[:message]="You already have an account with the email provided. Please login using the form below."
       redirect '/login'
     else
-      flash[:message] = "In order to sign up, please provide you name, email and a password. Thanks!"
+      flash[:message] = "In order to sign up, please provide your name, email and a password. Thanks!"
       redirect '/signup'
     end
   end
@@ -50,8 +50,6 @@ class UsersController < ApplicationController
     end
   end
 
-
-
   get '/users/:id' do
     if logged_in? && current_user.id == params[:id].to_i
       @user = User.find_by(id: current_user.id)
@@ -60,7 +58,7 @@ class UsersController < ApplicationController
       flash[:message] = "You cannot view another User's book list. We've redirected to your own book list."
       redirect "/users/#{current_user.id}"
     else
-      flash[:message] = "Need to be logged in to view your book list page. Please Login."
+      flash[:message] = "You need to be logged in to view your book list page. Please Login."
       redirect '/login'
     end
   end

@@ -37,7 +37,7 @@ class BooksController < ApplicationController
       @book = Book.find_by_id(params[:id])
       @dup = Book.find_by(title: params[:book][:title], author: params[:book][:author])
       if @dup && @book.id != @dup.id
-        flash[:message] = "There is already a book in the system by the same title and authur. Redirected to that book show page."
+        flash[:message] = "There is already a book in the system with the same title and authur. Redirected to that book show page."
         redirect "/books/#{@dup.id}"
       elsif @book.update(params[:book])
         # if the book params provide are valid, the book is updated and user is redirected to

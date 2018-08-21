@@ -33,12 +33,13 @@ class BooksController < ApplicationController
     end
 
    patch '/books/:id' do
-    if logged_in?
       @book = Book.find_by_id(params[:id])
       @dup = Book.find_by(title: params[:book][:title], author: params[:book][:author])
-      if @dup && @book.id != @dup.id
-        flash[:message] = "There is already a book in the system with the same title and authur. Redirected to that book show page."
-        redirect "/books/#{@dup.id}"
+      if !logged_in?
+        erb :'users/login'
+      elsif @dup && @book.id != @dup.id
+          flash[:message] = "There is already a book in the system with the same title and authur. Redirected to that book show page."
+          redirect "/books/#{@dup.id}"
       elsif @book.update(params[:book])
         # if the book params provide are valid, the book is updated and user is redirected to
         # the book show page with an succeffully updated message
@@ -48,14 +49,11 @@ class BooksController < ApplicationController
         flash[:message] = "When editing a book, please be sure to include both a title and an author."
         redirect "/books/#{@book.id}/edit"
       end
-    else
-      erb :'users/login'
-    end
    end
 
   delete '/books/:id/delete' do
     @book = Book.find_by_id(params[:id])
-    if (@book.book_list_items.count == 1 && @book.book_list_items.first.user_id == current_user.id)
+    if (@book.book_list_items.count == 1 && user_authorized?(@book.book_list_items.first.user_id))
       flash[:message] = "You have removed '#{@book.title} by #{@book.author}' from the book index."
       @book.destroy
       redirect "/books"

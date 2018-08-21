@@ -20,8 +20,9 @@ class BookListItemsController < ApplicationController
       redirect "/users/#{current_user.id}"
     elsif params[:book_list_item] && params[:add_book_button]
       # user clicked add button on book page - add book to user's book list
+        book = Book.find_by_id(params[:book_list_item][:book_id])
         new_by_button = BookListItem.create(params[:book_list_item])
-        flash[:message]="#{params[:book_list_item][title]} added to your book list."
+        flash[:message]="'#{book.title} by #{book.author}' added to your book list."
         redirect "/users/#{current_user.id}"
     else
       # logic for post add new book list item page

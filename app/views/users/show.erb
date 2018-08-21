@@ -27,13 +27,13 @@
         <td><%=book_list_item.note%></td>
         <td>
           <form action="/book_list_items/<%=book_list_item.id%>/edit" method="get">
-          <input type="submit" name="edit entry" value="Edit">
+            <input type="submit" name="edit entry" value="Edit">
           </form>
         </td>
         <td>
           <form action="/book_list_items/<%=book_list_item.id%>/delete" method="post">
-          <input type="hidden" name="_method" value="delete">
-          <input type="submit" name="remove list item" value="Remove">
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" name="remove list item" value="Remove">
           </form>
         </td>
       </tr>

@@ -21,8 +21,6 @@
     <% addable =  !@book.book_list_items.find_by(user_id: current_user.id) %>
 
     <form action="/book_list_items" method="post">
-      <input type="hidden" name="book" value="">
-
       <input type="hidden" name="book_list_item[book_id]" value="<%=@book.id%>">
       <input type="hidden" name="book_list_item[user_id]" value="<%=current_user.id%>">
       <input type="hidden" name="add_book_button" value="true">

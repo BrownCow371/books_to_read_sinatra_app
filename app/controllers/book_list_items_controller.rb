@@ -1,6 +1,6 @@
 class BookListItemsController < ApplicationController
   # Users should only be able to add a book to their list once
-  # (so there is only one book list itme per book per user)
+  # (so there is only one book list item per book, per user)
 
   # no get '/book_list_items' index page - doesn't make any sense
 
@@ -47,17 +47,6 @@ class BookListItemsController < ApplicationController
       redirect "/users/#{current_user.id}"
     end
 
-  end
-
-  get '/book_list_items/:id' do
-    # We don't call this route via any buttons...is this needed?
-    @booklistitem = BookListItem.find_by_id(params[:id])
-    if @booklistitem.user_id == current_user.id
-      erb '/book_list_items/show'
-    else
-      flash[:message] = "You cannot view List items from other user's lists. We've redirected you to your own book list page."
-      redirect "/users/#{current_user.id}"
-    end
   end
 
   get '/book_list_items/:id/edit' do

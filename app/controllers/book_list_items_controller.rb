@@ -16,6 +16,8 @@ class BookListItemsController < ApplicationController
 
   post '/book_list_items' do
     # binding.pry
+    # redirect_if_not_authorized
+    #
     if params[:book_list_item][:user_id].to_i == current_user.id
       if params[:book_list_item] && params[:add_book_button]
         new_by_button = BookListItem.create(params[:book_list_item])
@@ -50,11 +52,10 @@ class BookListItemsController < ApplicationController
   end
 
   get '/book_list_items/:id/edit' do
-     if logged_in?
-      @book_list_item=BookListItem.find_by_id(params[:id])
-      erb :'book_list_items/edit'
+     if logged_in? && @book_list_item=BookListItem.find_by_id(params[:id])
+         erb :'book_list_items/edit'
      else
-      erb :'users/login'
+       redirect "/users/#{current_user.id}"
      end
   end
 

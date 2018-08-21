@@ -51,10 +51,10 @@ class UsersController < ApplicationController
   end
 
   get '/users/:id' do
-    if logged_in? && current_user.id == params[:id].to_i
+    if logged_in? && user_authorized?(params[:id])
       @user = User.find_by(id: current_user.id)
       erb :'users/show'
-    elsif logged_in? && !(current_user.id == params[:id].to_i)
+    elsif logged_in? && !user_authorized?(params[:id])
       flash[:message] = "You cannot view another User's book list. We've redirected to your own book list."
       redirect "/users/#{current_user.id}"
     else

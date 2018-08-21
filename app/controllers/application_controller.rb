@@ -1,7 +1,7 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
-  use Rack::Flash
+register Sinatra::Flash
 
   configure do
     set :public_folder, 'public'
@@ -21,6 +21,10 @@ class ApplicationController < Sinatra::Base
 
     def current_user
       User.find_by_id(session[:user_id])
+    end
+
+    def user_authorized?(id)
+      current_user.id == id.to_i
     end
   end
 

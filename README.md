@@ -3,11 +3,11 @@
 This application allows the user to create and store a list of books that they wish to read. Users can modify their lists, as well as add new books to the system. They may edit and delete books that they created, provided no one else has added them to their own list. Books can only appear on a user's list once (cannot have multiple rows for the same book on a user list).
 
 ## Demo Link
-A demo video of the application can be found [here](https://youtu.be/78JCePOBzJs).
+A demo video of the application can be found [here](https://youtu.be/hJr0w-e9_ow).
 
 ## Installation
 
-Clone down this repository and run bundle. From your terminal run shotgun to get the app running on your local host.
+Clone down this repository. Then run "bundle" to install all the required gem files. Then you need to run "rake db:migrate" and "rake db:seed" to set up the database. From your terminal run "shotgun" to run the app on your local host.
 
 ## Contributing
 

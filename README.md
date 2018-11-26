@@ -2,6 +2,9 @@
 
 This application allows the user to create and store a list of books that they wish to read. Users can modify their lists, as well as add new books to the system. They may edit and delete books that they created, provided no one else has added them to their own list. Books can only appear on a user's list once (cannot have multiple rows for the same book on a user list).
 
+## Demo Link
+A demo video of the application can be found [here](https://youtu.be/78JCePOBzJs).
+
 ## Installation
 
 Clone down this repository and run bundle. From your terminal run shotgun to get the app running on your local host.
